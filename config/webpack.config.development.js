@@ -14,7 +14,8 @@ const devServer = {
     "/api": "http://socely_server:8080",
     "/uploads": "http://socely_server:8080",
   },
-  public: "http://localhost:8080",
+  public: "wp5rs.localhost",
+  publicPath: "/clicker/",
 };
 
 module.exports = merge(common, {

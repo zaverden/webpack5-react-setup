@@ -1,7 +1,29 @@
 version: "3.7"
 
 services:
-  client-serve:
+  r-proxy:
+    image: traefik:v2.3
+    logging:
+      driver: none
+    ports:
+      - '80:80'
+    restart: always
+    command:
+      - --api=true
+      - --api.dashboard=true
+      - --providers.docker=true
+      - --providers.docker.exposedByDefault=false
+      - --entryPoints.http.address=:80
+      - --log.level=INFO
+      - --accessLog
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.rule=Host(`traefik.${APP_HOST}`)
+      - traefik.http.routers.traefik.service=api@internal
+    tty: true
+  clicker:
     image: node:${NODE_VER}
     working_dir: /app
     volumes:
@@ -15,3 +37,7 @@ services:
     entrypoint: ["sh", "-e", "./local-entry.sh"]
     ports:
       - 8080:3000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.clicker.rule=HostRegexp(`${APP_HOST}`) && PathPrefix(`/clicker/`)
+      - traefik.http.routers.clicker-hmr.rule=HostRegexp(`${APP_HOST}`) && PathPrefix(`/sockjs-node`) && HeadersRegexp(`referer`, `^http://${APP_HOST}/clicker/`)
