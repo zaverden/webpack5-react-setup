@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  live-server:
+    build: ./
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./build:/var/www
