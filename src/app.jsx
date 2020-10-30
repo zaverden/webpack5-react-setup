@@ -1,12 +1,18 @@
+import { hot } from "react-hot-loader/root";
 import styled from "@emotion/styled";
-import { Fragment, useCallback, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 
 const Button = styled.button`
-  color: hotpink;
+  color: blue;
 `;
-export function App() {
+function App() {
   const [count, setCount] = useState(0);
   const increment = useCallback(() => setCount((c) => c + 1));
+  useEffect(() => {
+    if (count % 2 !== 0) {
+      setCount((c) => c + 3);
+    }
+  }, [count, increment]);
   console.log(count);
   return (
     <Fragment>
@@ -15,3 +21,6 @@ export function App() {
     </Fragment>
   );
 }
+
+const HotApp = hot(App);
+export { HotApp as App };

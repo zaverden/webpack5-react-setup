@@ -28,6 +28,7 @@ const commonConfig = {
               "@babel/preset-env",
               _a("@babel/preset-react", { runtime: "automatic" }),
             ],
+            plugins: ["react-hot-loader/babel"],
           },
         },
       },

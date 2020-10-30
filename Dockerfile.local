@@ -1,0 +1,2 @@
+ARG NODE_VER=node:latest
+FROM node:$NODE_VER

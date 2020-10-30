@@ -1,9 +1,17 @@
 version: "3.7"
 
 services:
-  live-server:
-    build: ./
-    ports:
-      - "8080:8080"
+  client-serve:
+    image: node:${NODE_VER}
+    working_dir: /app
     volumes:
-      - ./build:/var/www
+      - /app/node_modules
+      - ./config:/app/config:ro
+      - ./public:/app/public:ro
+      - ./src:/app/src:ro
+      - ./package-lock.json:/app/package-lock.json:ro
+      - ./package.json:/app/package.json:ro
+      - ./local-entry.sh:/app/local-entry.sh:ro
+    entrypoint: ["sh", "-e", "./local-entry.sh"]
+    ports:
+      - 8080:3000
