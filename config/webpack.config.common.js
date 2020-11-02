@@ -10,7 +10,7 @@ function _a(...args) {
 /** @type {import('webpack').Configuration} */
 const commonConfig = {
   entry: {
-    app: ["react-hot-loader/patch", "./src/index.jsx"],
+    app: "./src/index.jsx",
   },
   output: {
     path: path.resolve(__dirname, "../build"),
@@ -29,7 +29,7 @@ const commonConfig = {
               "@babel/preset-env",
               _a("@babel/preset-react", { runtime: "automatic" }),
             ],
-            plugins: ["react-hot-loader/babel"],
+            plugins: [],
           },
         },
       },

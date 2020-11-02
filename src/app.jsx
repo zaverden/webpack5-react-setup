@@ -1,11 +1,10 @@
-import { hot } from "react-hot-loader/root";
 import styled from "@emotion/styled";
 import { Fragment, useCallback, useEffect, useState } from "react";
 
 const Button = styled.button`
   color: red;
 `;
-function App() {
+export function App() {
   const [count, setCount] = useState(0);
   const increment = useCallback(() => setCount((c) => c + 10));
   useEffect(() => {
@@ -21,6 +20,3 @@ function App() {
     </Fragment>
   );
 }
-
-const HotApp = hot(App);
-export { HotApp as App };
