@@ -2,6 +2,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 function _a(...args) {
   return args;
@@ -29,7 +30,7 @@ const commonConfig = {
               "@babel/preset-env",
               _a("@babel/preset-react", { runtime: "automatic" }),
             ],
-            plugins: [],
+            plugins: ["react-refresh/babel"],
           },
         },
       },
@@ -53,6 +54,7 @@ const commonConfig = {
       minify: false,
       template: "public/index.html",
     }),
+    new ReactRefreshWebpackPlugin(),
   ],
   resolve: {
     extensions: [".js", ".jsx"],
